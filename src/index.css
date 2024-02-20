@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.selected-names{
+  margin: 10px;
+  color: rgb(135, 135, 236);
+
+}
