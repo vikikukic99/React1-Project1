@@ -99,6 +99,7 @@ function NameSelector() {
 
   return (
     <Container>
+        <div className='selected-names'>Find perfect name for your puppy</div>
       <NameContainer
         key={names[currentIndex]}
         initial={{ opacity: 0, scale: 0.8 }}
