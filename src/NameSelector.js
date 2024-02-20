@@ -2,31 +2,63 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+
+// Container for the whole app
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
+  min-height: 50vh;
+  background-color: #f0f4f8;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 `;
 
+// Animations for name transitions
 const NameContainer = styled(motion.div)`
   margin: 20px;
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
+  color: #2a9d8f;
+  background-color: #e9f5f2;
+  padding: 20px 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 `;
 
+// Styling for button container
 const ButtonContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 `;
 
+// Button styling for Yes, No, Maybe options
 const Button = styled.button`
   margin: 0 10px;
   padding: 10px 20px;
-  font-size: 20px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #264653;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition-timing-function: linear;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: background-color 0.3s, transform 0.2s;
 
+  &:hover {
+    background-color: #2a9d8f;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
 `;
+
+// Additional global style for overall app consistency
+// You can add this in your index.css or App.css
 
 const names = [
   "Sophia", "Jackson", "Olivia", "Liam", "Emma",
