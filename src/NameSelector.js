@@ -57,8 +57,6 @@ const Button = styled.button`
   }
 `;
 
-// Additional global style for overall app consistency
-// You can add this in your index.css or App.css
 
 const names = [
   "Sophia", "Jackson", "Olivia", "Liam", "Emma",
@@ -85,11 +83,11 @@ function NameSelector() {
     } else if (response === 'maybe') {
       maybeNames.push(name);
     }
-    // Move to the next name, considering maybe names as well
+    
     setCurrentIndex(prev => (prev + 1) % names.length);
   };
 
-  // Re-introducing maybe names when list ends
+  
   useEffect(() => {
     if (currentIndex === names.length - 1) {
       names.push(...maybeNames);
