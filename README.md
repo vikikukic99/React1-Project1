@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Name Selector App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Name Selector App is a React-based web application designed to help users choose names for various purposes, such as for babies, pets, or companies. Users can respond to each suggested name with 'Yes', 'No', or 'Maybe', allowing them to curate a list of preferred names. The application features a sleek, user-friendly interface and provides an engaging experience with animations and the ability to review rejected names.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Selected Names List:** View all names approved (selected with 'Yes').
+- **Single Name Display:** Displays one name at a time from a predefined list.
+- **Response Options:** Users can respond to each name with 'Yes', 'No', or 'Maybe'.
+- **Review Rejected Names:** Option to view and reconsider the names marked as 'No'.
+- **Animations:** Smooth transitions and animations for user interactions.
+- **Responsive Design:** Ensures a great experience across various devices.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+Before you begin, ensure you have the following installed:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (Recommended version: 14.x or later)
+- npm (Node Package Manager)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository to your local machine:
+   ```sh
+   git clone https://github.com/yourusername/name-selector-app.git
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Navigate to the project directory: cd name-selector-app
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install the necessary dependencies: npm install
 
-### `npm run eject`
+Start the development server: npm start --This command will run the app in development mode. Open http://localhost:3000 to view it in your browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-Usage-
+Upon launching the Name Selector App, you'll be greeted with a single name from the predefined list. Use the 'Yes', 'No', or 'Maybe' buttons to respond to each name. Selected names will be added to your 'Selected Names' list, which you can review at any time. If you wish to see the names you've rejected, click on the link provided to toggle the visibility of the rejected names list.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-Built With-
+React - The web framework used
+Styled Components - For styling
+Framer Motion - Used for animations
