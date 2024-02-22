@@ -11,3 +11,21 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+/* .fireworks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,255,255,1) 20%, rgba(0,212,255,1) 100%);
+  animation: fireworks-animation 1s infinite;
+}
+
+@keyframes fireworks-animation {
+  0% {background-position: 0 0;}
+  50% {background-position: 100% 100%;}
+  100% {background-position: 0 0;}
+} */

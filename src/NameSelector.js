@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import Fireworks from './Fireworks';
+
 
 
 // Container for the whole app
@@ -102,11 +104,9 @@ function NameSelector() {
     } else if (lastAction.response === 'no') {
       setRejectedNames(rejectedNames.filter(name => name !== lastAction.name));
     }
-    // Optionally, handle 'maybe' if you need to
+    
 
     setLastAction(null);
-    // Optional: Adjust currentIndex if needed
-    // setCurrentIndex(currentIndex - 1);
   };
 
   useEffect(() => {
@@ -116,29 +116,44 @@ function NameSelector() {
   return (
     <Container>
         <div className='selected-names'>Find the perfect name for your puppy</div>
+
+        
+
         {activeNames.length > 0 ? (
-          <NameContainer
-            key={activeNames[currentIndex]}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            {activeNames[currentIndex]}
-          </NameContainer>
+          <>
+            <NameContainer
+              key={activeNames[currentIndex]}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              {activeNames[currentIndex]}
+            </NameContainer>
+            <ButtonContainer>
+              <Button onClick={() => handleResponse('yes', activeNames[currentIndex])}>Yes</Button>
+              <Button onClick={() => handleResponse('no', activeNames[currentIndex])}>No</Button>
+              <Button onClick={() => handleResponse('maybe', activeNames[currentIndex])}>Maybe</Button>
+              <Button onClick={undoLastAction}>One Step Back</Button>
+            </ButtonContainer>
+          </>
         ) : (
-          <div>No more names to display.</div>
+          <div className="fireworks">🎆 Congratulations! No more names to display. 🎆
+          <Fireworks /></div>
         )}
-      <ButtonContainer>
-        <Button onClick={() => handleResponse('yes', activeNames[currentIndex])}>Yes</Button>
-        <Button onClick={() => handleResponse('no', activeNames[currentIndex])}>No</Button>
-        <Button onClick={() => handleResponse('maybe', activeNames[currentIndex])}>Maybe</Button>
-        <Button onClick={undoLastAction}>One Step Back</Button>
-      </ButtonContainer>
       <div className='selected-names'>
         Selected names: {selectedNames.join(', ')}
+        
       </div>
+      
     </Container>
+    
   );
+  
 }
 
+
 export default NameSelector;
+
+
+
+  
