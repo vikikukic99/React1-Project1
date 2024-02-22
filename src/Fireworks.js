@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
 
+
 const Fireworks = () => {
   useEffect(() => {
     const end = Date.now() + (15 * 1000);

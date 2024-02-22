@@ -15,6 +15,14 @@ code {
 }
 
 .selected-names{
-  margin: 10px;
+  margin: 40px;
   color: #2a9d8f;
+}
+
+.didint-like-names{
+  border: none;
+}
+
+.ul{
+  background-color: none;
 }

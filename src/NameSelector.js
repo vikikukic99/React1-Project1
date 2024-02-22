@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Fireworks from './Fireworks';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 // Container for the whole app
 const Container = styled.div`
-  display: flex;
+  display:flex ;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
+  min-height: 100vh;
   background-color: #f0f4f8;
   color: #333;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
 `;
 
 // Animations for name transitions
@@ -26,18 +28,18 @@ const NameContainer = styled(motion.div)`
   background-color: #e9f5f2;
   padding: 20px 40px;
   border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 10px rgba(0,0,0,0.1);
 `;
 
 // Styling for button container
 const ButtonContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 70px;
   display: flex;
   justify-content: center;
 `;
 
 // Button styling for Yes, No, Maybe options
-const Button = styled.button`
+const MotionButton = styled(motion.button)`
   margin: 0 10px;
   padding: 10px 20px;
   font-size: 16px;
@@ -59,6 +61,27 @@ const Button = styled.button`
   }
 `;
 
+const ToggleLink = styled.button`
+  background: none;
+  border: none;
+  color: #2a9d8f;
+  cursor: pointer;
+  padding: 20px 40px;
+  margin: 20px;
+  font-size: 30px;
+  text-decoration: underline;
+
+  &:hover {
+    color: #264653; /* Darker shade for hover state */
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: none; /* Removes the outline to keep the UI clean */
+  }
+`;
+
+
 
 const namesList = [
   "Sophia", "Jackson", "Olivia", "Liam", "Emma",
@@ -73,6 +96,8 @@ const namesList = [
   "Wyatt", "Aria", "Jayden", "Zoey", "Gabriel"
 ];
 
+
+
 function NameSelector() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedNames, setSelectedNames] = useState([]);
@@ -80,6 +105,11 @@ function NameSelector() {
   const [maybeNames, setMaybeNames] = useState([]);
   const [activeNames, setActiveNames] = useState([...namesList]);
   const [lastAction, setLastAction] = useState(null);
+  const [showRejectedNames, setShowRejectedNames] = useState(false);
+const toggleRejectedNames = () => {
+    setShowRejectedNames(prev => !prev);
+  };
+  
 
   useEffect(() => {
     const filteredNames = namesList.filter(name => !selectedNames.includes(name) && !rejectedNames.includes(name));
@@ -117,41 +147,52 @@ function NameSelector() {
     <Container>
         <div className='selected-names'>Find the perfect name for your puppy</div>
 
-        
-
         {activeNames.length > 0 ? (
           <>
             <NameContainer
-              key={activeNames[currentIndex]}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              {activeNames[currentIndex]}
+                key={activeNames[currentIndex]}
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+                >
+                {activeNames[currentIndex]}
             </NameContainer>
+
             <ButtonContainer>
-              <Button onClick={() => handleResponse('yes', activeNames[currentIndex])}>Yes</Button>
-              <Button onClick={() => handleResponse('no', activeNames[currentIndex])}>No</Button>
-              <Button onClick={() => handleResponse('maybe', activeNames[currentIndex])}>Maybe</Button>
-              <Button onClick={undoLastAction}>One Step Back</Button>
+                <MotionButton whileHover={{ scale: 1.05 }} whileTap={{ scale: 1.95 }} onClick={() => handleResponse('yes', activeNames[currentIndex])} >Yes
+                </MotionButton>
+                <MotionButton whileHover={{ scale: 1.05 }} whileTap={{ scale: 1.95 }} onClick={() => handleResponse('no', activeNames[currentIndex])}>No</MotionButton>
+                <MotionButton whileHover={{ scale: 1.05 }} whileTap={{ scale: 1.95 }} onClick={() => handleResponse('maybe', activeNames[currentIndex])}>Maybe</MotionButton>
+                <MotionButton onClick={undoLastAction}>
+                    <FontAwesomeIcon icon={faArrowLeft} style={{ marginRight: '5px' }} size="lg" /> 
+                </MotionButton>
             </ButtonContainer>
+
           </>
         ) : (
-          <div className="fireworks">🎆 Congratulations! No more names to display. 🎆
-          <Fireworks /></div>
+          <motion.div className="fireworks">🎆 Congratulations! This is your chosen list of names. 🎆
+          <Fireworks /></motion.div>
         )}
-      <div className='selected-names'>
-        Selected names: {selectedNames.join(', ')}
+            <motion.div className='selected-names'>Selected names: {selectedNames.join(', ')}</motion.div>
+
+            <ToggleLink onClick={toggleRejectedNames}>
+                {showRejectedNames ? 'Hide' : 'Show'} names I didn't like
+            </ToggleLink>
         
+        {showRejectedNames && (
+      <div>
+        <h3>Names Rejected:</h3>
+        <ul>
+          {rejectedNames.map(name => (
+            <li key={name}>{name}</li>
+          ))}
+        </ul>
       </div>
-      
-    </Container>
-    
-  );
-  
+    )}
+  </Container>
+);
 }
-
-
 export default NameSelector;
 
 
