@@ -71,16 +71,15 @@ const namesList = [
   "Wyatt", "Aria", "Jayden", "Zoey", "Gabriel"
 ];
 
-
 function NameSelector() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedNames, setSelectedNames] = useState([]);
   const [rejectedNames, setRejectedNames] = useState([]);
   const [maybeNames, setMaybeNames] = useState([]);
   const [activeNames, setActiveNames] = useState([...namesList]);
+  const [lastAction, setLastAction] = useState(null);
 
   useEffect(() => {
-    // Filter out names that are either selected or rejected
     const filteredNames = namesList.filter(name => !selectedNames.includes(name) && !rejectedNames.includes(name));
     setActiveNames(filteredNames);
   }, [selectedNames, rejectedNames]);
@@ -90,15 +89,26 @@ function NameSelector() {
       setSelectedNames(prev => [...prev, name]);
     } else if (response === 'no') {
       setRejectedNames(prev => [...prev, name]);
-    } else if (response === 'maybe') {
-      // Maybe logic remains the same, as maybeNames is not directly affecting the filtering
     }
-
-    // Move to the next name, but ensure we cycle through activeNames
+    setLastAction({ response, name });
     setCurrentIndex(prev => (prev + 1) % activeNames.length);
   };
 
-  // When activeNames changes, reset currentIndex to 0 to start from the beginning of the filtered list
+  const undoLastAction = () => {
+    if (!lastAction) return;
+
+    if (lastAction.response === 'yes') {
+      setSelectedNames(selectedNames.filter(name => name !== lastAction.name));
+    } else if (lastAction.response === 'no') {
+      setRejectedNames(rejectedNames.filter(name => name !== lastAction.name));
+    }
+    // Optionally, handle 'maybe' if you need to
+
+    setLastAction(null);
+    // Optional: Adjust currentIndex if needed
+    // setCurrentIndex(currentIndex - 1);
+  };
+
   useEffect(() => {
     setCurrentIndex(0);
   }, [activeNames]);
@@ -122,6 +132,7 @@ function NameSelector() {
         <Button onClick={() => handleResponse('yes', activeNames[currentIndex])}>Yes</Button>
         <Button onClick={() => handleResponse('no', activeNames[currentIndex])}>No</Button>
         <Button onClick={() => handleResponse('maybe', activeNames[currentIndex])}>Maybe</Button>
+        <Button onClick={undoLastAction}>One Step Back</Button>
       </ButtonContainer>
       <div className='selected-names'>
         Selected names: {selectedNames.join(', ')}
